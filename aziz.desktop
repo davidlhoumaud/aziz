@@ -1,0 +1,16 @@
+[Desktop Entry]
+Name=Aziz
+Comment=Automate pour Gnome
+GenericName=Aziz
+Exec=/usr/bin/aziz
+Terminal=false
+X-MultipleArgs=false
+Type=Application
+Icon=info
+Categories=System;GTK;
+StartupWMClass=Aziz
+StartupNotify=true
+Name[fr]=Aziz Lumière
+Comment[fr]=Lire et écrire des courriels
+Keywords=Aziz;System;Apt;Update;Upgrade;Clean;
+Name[fr_FR]=Aziz Lumière
