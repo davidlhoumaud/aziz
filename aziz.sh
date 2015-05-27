@@ -20,45 +20,72 @@ neutre='\e[0;m'
 
 function action() {
     case $1 in
-    1 ) echo -e "Il est ${cyanclair}`date +'%H:%M:%S'`${neutre}" ;;
-    2 ) echo "Je met à jour le système"
-        zenity --notification --window-icon="info" --text="Aziz met à jour le système"
-        sudo apt-get update
-        sudo apt-get upgrade
-        sudo apt-get dist-update
+    1 ) echo "Je vais mettre à jour le système via APT"
+        zenity --notification --window-icon="info" --text="Aziz va mettre à jour le système via APT"
+        zenity --question --title="Aziz" --window-icon="info" --text="Voulez-vous vraiment continuer ?"
+        if [[ $? -eq 0 ]]; then
+            $TERM -e "sudo apt-get update;sudo apt-get upgrade;sudo apt-get dist-upgrade"
+        fi
     ;;
-    3 ) echo "Je nettoie APT"
-        zenity --notification --window-icon="info" --text="Aziz nettoie APT"
-        sudo apt-get autoclean
-        sudo apt-get clean
-        sudo apt-get autoremove
+    2 ) echo "Je vais supprimer les paquets inutilisés de APT"
+        zenity --notification --window-icon="info" --text="Aziz va supprimer les paquets inutilisés de APT"
+        zenity --question --title="Aziz" --window-icon="info" --text="Voulez-vous vraiment continuer ?"
+        if [[ $? -eq 0 ]]; then
+            $TERM -e sudo apt-get autoremove
+        fi
     ;;
-    4 ) echo "Je vide la corbeille"
-        zenity --notification --window-icon="info" --text="Aziz vide la corbeille"
-        rm -r -f ~/.local/share/Trash/files/*
+    3 ) echo "Je vais nettoyer APT"
+        zenity --notification --window-icon="info" --text="Aziz va nettoyer APT"
+        zenity --question --title="Aziz" --window-icon="info" --text="Voulez-vous vraiment continuer ?"
+        if [[ $? -eq 0 ]]; then
+            $TERM -e "sudo apt-get autoclean;sudo apt-get clean"
+        fi
     ;;
-    5 ) echo "Je supprime les miniatures des images"
-        zenity --notification --window-icon="info" --text="Aziz supprime les miniatures des images"
-        find ~/.thumbnails -type f -atime +7 -delete
+    4 ) echo "Je vais vider la corbeille"
+        zenity --notification --window-icon="info" --text="Aziz va vider la corbeille"
+        zenity --question --title="Aziz" --window-icon="info" --text="Voulez-vous vraiment continuer ?"
+        if [[ $? -eq 0 ]]; then
+            $TERM -e "rm -r -f ~/.local/share/Trash/files/*"
+        fi
     ;;
-    6 ) echo "Je supprime les fichiers de sauvegarde"
-        zenity --notification --window-icon="info" --text="Aziz supprime les fichiers de sauvegarde"
-        find ~/ -name '*~' -print0 | xargs -0 rm
+    5 ) echo "Je vais supprimer les miniatures des images"
+        zenity --notification --window-icon="info" --text="Aziz va supprimer les miniatures des images"
+        zenity --question --title="Aziz" --window-icon="info" --text="Voulez-vous vraiment continuer ?"
+        if [[ $? -eq 0 ]]; then
+            $TERM -e "find ~/.thumbnails -type f -atime +7 -delete"
+        fi
     ;;
-    7 ) echo "Je supprime les fichiers temporaires d'Adobe Flash Player"
-        zenity --notification --window-icon="info" --text="Aziz supprime les fichiers temporaires d'Adobe Flash Player"
-        rm -r ~/.adobe/Flash_Player;rm -r ~/.macromedia/Flash_Player
+    6 ) echo "Je vais supprimer les fichiers de sauvegarde"
+        zenity --notification --window-icon="info" --text="Aziz va supprimer les fichiers de sauvegarde"
+        zenity --question --title="Aziz" --window-icon="info" --text="Voulez-vous vraiment continuer ?"
+        if [[ $? -eq 0 ]]; then
+            $TERM -e "find ~/ -name '*~' -print0 | xargs -0 rm"
+        fi
+    ;;
+    7 ) echo "Je vais supprimer les fichiers temporaires d'Adobe Flash Player"
+        zenity --notification --window-icon="info" --text="Aziz va supprimer les fichiers temporaires d'Adobe Flash Player"
+        zenity --question --title="Aziz" --window-icon="info" --text="Voulez-vous vraiment continuer ?"
+        if [[ $? -eq 0 ]]; then
+            $TERM -e "rm -r ~/.adobe/Flash_Player;rm -r ~/.macromedia/Flash_Player"
+        fi
     ;;
     esac
     
-    sleep 60
+    sleep $2
     nombreAction=$RANDOM
-    let "nombreAction %= 11"
-    action $nombreAction
+    let "nombreAction %= 7"
+    action $nombreAction $2
 }
+
 echo -e "${jaune}Aziz Lumière !!${neutre}"
 echo -e "Bonjour ${cyanclair}$USER${neutre}"
 echo -e "Nous somme le ${cyanclair}`date +'%A %d %B %Y'`${neutre}"
+echo -e "Il est ${cyanclair}`date +'%H:%M:%S'`${neutre}"
 nombreAction=$RANDOM
 let "nombreAction %= 7"
-action $nombreAction
+if [[ $1 != "" ]];then
+    tim=$1
+else
+    tim=60
+fi
+action $nombreAction $tim
