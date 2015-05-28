@@ -1,7 +1,7 @@
 [Desktop Entry]
-Name=Aziz
+Name=Aziz lumière !!
 Comment=Automate pour Gnome
-GenericName=Aziz
+GenericName=Aziz lumière !!
 Exec=/usr/bin/aziz
 Terminal=false
 X-MultipleArgs=false
@@ -10,7 +10,7 @@ Icon=info
 Categories=System;GTK;
 StartupWMClass=Aziz
 StartupNotify=true
-Name[fr]=Aziz Lumière
+Name[fr]=Aziz lumière !!
 Comment[fr]=Lire et écrire des courriels
 Keywords=Aziz;System;Apt;Update;Upgrade;Clean;
-Name[fr_FR]=Aziz Lumière
+Name[fr_FR]=Aziz lumière !!
