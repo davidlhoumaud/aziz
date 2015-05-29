@@ -24,7 +24,7 @@ function action() {
     if [[ $currentAction -eq $1 || $currentAction_old -eq $1 ]]; then
         echo -e "${rougefonce}Nouvelle action...${neutre}"
         nombreAction=$RANDOM
-        let "nombreAction %= 8"
+        let "nombreAction %= 9"
         action $nombreAction $2
     else
         currentAction=$1
@@ -102,7 +102,7 @@ echo -e "Bonjour ${cyanclair}$USER${neutre}"
 echo -e "Nous somme le ${cyanclair}`date +'%A %d %B %Y'`${neutre}"
 echo -e "Il est ${cyanclair}`date +'%H:%M:%S'`${neutre}"
 nombreAction=$RANDOM
-let "nombreAction %= 8"
+let "nombreAction %= 9"
 if [[ $1 != "" ]];then
     tim=$1
 else
