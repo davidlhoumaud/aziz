@@ -33,43 +33,43 @@ function action() {
         fi
         case $currentAction in
         1 ) echo "Je vais mettre à jour le système via APT"
-            zenity --question --timeout=10 --title="Aziz" --window-icon="info" --text="Aziz va mettre à jour le système via APT\nVoulez-vous vraiment continuer ?"
+            zenity --question --timeout=$2 --title="Aziz" --window-icon="info" --text="Aziz va mettre à jour le système via APT\nVoulez-vous vraiment continuer ?"
             if [[ $? -eq 0 ]]; then
                 xterm -e "sudo apt-get update;sudo apt-get upgrade;sudo apt-get dist-upgrade"
             fi
         ;;
         2 ) echo "Je vais supprimer les paquets inutilisés de APT"
-            zenity --question --timeout=10 --title="Aziz" --window-icon="info" --text="Aziz va supprimer les paquets inutilisés de APT\nVoulez-vous vraiment continuer ?"
+            zenity --question --timeout=$2 --title="Aziz" --window-icon="info" --text="Aziz va supprimer les paquets inutilisés de APT\nVoulez-vous vraiment continuer ?"
             if [[ $? -eq 0 ]]; then
                 xterm -e sudo apt-get autoremove
             fi
         ;;
         3 ) echo "Je vais nettoyer APT"
-            zenity --question --timeout=10 --title="Aziz" --window-icon="info" --text="Aziz va nettoyer APT\nVoulez-vous vraiment continuer ?"
+            zenity --question --timeout=$2 --title="Aziz" --window-icon="info" --text="Aziz va nettoyer APT\nVoulez-vous vraiment continuer ?"
             if [[ $? -eq 0 ]]; then
                 xterm -e "sudo apt-get autoclean;sudo apt-get clean"
             fi
         ;;
         4 ) echo "Je vais vider la corbeille"
-            zenity --question --timeout=10 --title="Aziz" --window-icon="info" --text="Aziz va vider la corbeille\nVoulez-vous vraiment continuer ?"
+            zenity --question --timeout=$2 --title="Aziz" --window-icon="info" --text="Aziz va vider la corbeille\nVoulez-vous vraiment continuer ?"
             if [[ $? -eq 0 ]]; then
                 xterm -e "rm -r -f ~/.local/share/Trash/files/*"
             fi
         ;;
         5 ) echo "Je vais supprimer les miniatures des images"
-            zenity --question --timeout=10 --title="Aziz" --window-icon="info" --text="Aziz va supprimer les miniatures des images\nVoulez-vous vraiment continuer ?"
+            zenity --question --timeout=$2 --title="Aziz" --window-icon="info" --text="Aziz va supprimer les miniatures des images\nVoulez-vous vraiment continuer ?"
             if [[ $? -eq 0 ]]; then
                 xterm -e "find ~/.thumbnails -type f -atime +7 -delete"
             fi
         ;;
         6 ) echo "Je vais supprimer les fichiers de sauvegarde"
-            zenity --question --timeout=10 --title="Aziz" --window-icon="info" --text="Aziz va supprimer les fichiers de sauvegarde\nVoulez-vous vraiment continuer ?"
+            zenity --question --timeout=$2 --title="Aziz" --window-icon="info" --text="Aziz va supprimer les fichiers de sauvegarde\nVoulez-vous vraiment continuer ?"
             if [[ $? -eq 0 ]]; then
                 xterm -e "find ~/ -name '*~' -print0 | xargs -0 rm"
             fi
         ;;
         7 ) echo "Je vais supprimer les fichiers temporaires d'Adobe Flash Player"
-            zenity --question --timeout=10 --title="Aziz" --window-icon="info" --text="Aziz va supprimer les fichiers temporaires d'Adobe Flash Player\nVoulez-vous vraiment continuer ?"
+            zenity --question --timeout=$2 --title="Aziz" --window-icon="info" --text="Aziz va supprimer les fichiers temporaires d'Adobe Flash Player\nVoulez-vous vraiment continuer ?"
             if [[ $? -eq 0 ]]; then
                 xterm -e "rm -r ~/.adobe/Flash_Player;rm -r ~/.macromedia/Flash_Player"
             fi
@@ -91,7 +91,7 @@ let "nombreAction %= 7"
 if [[ $1 != "" ]];then
     tim=$1
 else
-    tim=300 #5minute par défaut
+    tim=60 #1 minute par défaut
 fi
 action $nombreAction $tim
 exit
